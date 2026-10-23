@@ -27,7 +27,22 @@ Specific period	BETWEEN start_date AND end_date
 Numeric YYYYMMDD dates	CAST + CONCAT + SUBSTR
 
 =========================================
+
 EXAMPLE 1: Return records from the last 12 months.
+
+Inclusive vs Exclusive Dates
+
+SELECT *
+FROM Orders
+WHERE order_date >= '2025-01-01'
+AND order_date < '2026-01-01';
+
+Explanation : Preferred in professional reporting because it avoids date/time edge cases.
+Often safer than: BETWEEN
+
+=========================================
+
+EXAMPLE 2: Return records from the last 12 months.
 
 */
 
@@ -54,7 +69,7 @@ REPLACE(
 
 =========================================
 
-EXAMPLE 2: Date Stored as YYYYMMDD
+EXAMPLE 3: Date Stored as YYYYMMDD
 Convert a numeric date into a proper date field.
 
 SELECT
