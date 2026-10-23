@@ -207,17 +207,17 @@ Example:
 SELECT
     FORMAT(CAST(order_date AS DATE), 'yyyy-MM') AS month,
     COUNT(*) AS total_orders
-FROM*orders
+FROM orders
 GROUP BY FORMAT(CAST(order_*ate AS DATE), 'yyyy-MM');
 ```
 
 ---*
-If your date is stored as*a string in the format:
+If your date is stored as a string in the format:
 
 ```text
-2*240115*```
+20240115```
 
-you may need to convert it fi*st*
+you may need to convert it first
 
 ```sql
 SELECT
@@ -225,21 +225,21 @@ SELECT
         *ONCAT(
             SUBSTR(CAST(ord*r_date AS STRING*,1,4),
             '-',
-          **SUBSTR(CAST(order_date AS STRING),*,2),
+            SUBSTR(CAST(order_date AS STRING),5,2),
             '-',
-            *UBSTR(CAST(order_date AS STRING),7*2)
+            SUBSTR(CAST(order_date AS STRING),7,2)
         ) AS TIMESTAMP
-    ) AS*formatted_date
+    ) AS formatted_date
 FROM orders;
 ```
 
-O*tput*
+Output
 
 ```text
 20240115
 ```
 
-*ecomes
+Becomes
 
 ```text
 2024*01-15 00:00:00*```
