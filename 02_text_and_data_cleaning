@@ -50,11 +50,9 @@ These functions appear routinely in BigQuery, SQL Server* Snowflake, Redshift, P
 
 ### SQL
 
-```sql
 SELECT
     TRIM(CustomerName) AS customer_name
 FROM Customers;
-```
 
 ### Explanation
 
