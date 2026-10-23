@@ -6,6 +6,9 @@
  Users(user_id, name) 
  Orders(order_id, user_id)
  ```
+
+
+ ### Find Users with no orders
  ```text 
  SELECT u.*
  FROM Users u
