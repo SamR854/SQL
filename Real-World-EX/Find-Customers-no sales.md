@@ -1,10 +1,11 @@
 ## LEFT JOIN + IS NULL
   
  ### Find users who never placed an order
+ ```text
  Tables: 
  Users(user_id, name) 
  Orders(order_id, user_id)
-
+ ```
   
  SELECT u.*
  FROM Users u
