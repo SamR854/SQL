@@ -18,12 +18,12 @@ I’ve used SQL for querying and data extraction in BigQuery, including
 README.md
 
 01_filtering/
-├── basic_where.sql
-├── date_filtering.sql
+- ├── basic_where.sql
+- ├── date_filtering.sql
 
 02_text_and_data_cleaning/
-├── regex_cleaning.sql
-├── string_functions.sql
+- ├── regex_cleaning.sql
+- ├── string_functions.sql
 ├── casting.sql
 
 03_case_when/
