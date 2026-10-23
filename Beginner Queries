@@ -1,0 +1,23 @@
+-- 1. View first 10 rows
+SELECT *
+FROM orders
+LIMIT 10;
+
+-- 2. Show all orders from California
+SELECT *
+FROM orders
+WHERE state = 'California';
+
+-- 3. Find orders with sales greater than $500
+SELECT *
+FROM orders
+WHERE sales > 500;
+
+-- 4. Sort orders by highest sales
+SELECT *
+FROM orders
+ORDER BY sales DESC;
+
+-- 5. Count total orders
+SELECT COUNT(*)
+FROM orders;
