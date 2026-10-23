@@ -1,0 +1,104 @@
+/*
+=========================================
+DATE FILTERING
+=========================================
+
+Key Functions
+ - CURRENT_DATE()
+ - DATE_SUB()
+ - DATE_TRUNC()
+ - EXTRACT()
+ - BETWEEN
+ - CAST()
+ - CONCAT()
+ - SUBSTR()
+ - These functions form the foundation of most SQL reporting, dashboarding, and analytics workflows.
+
+=========================================
+
+## SQL Patterns ##
+Last 30 days	DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+Last 90 days	DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+Last 12 months	DATE_SUB(CURRENT_DATE(), INTERVAL 365 DAY)
+Current month	DATE_TRUNC(CURRENT_DATE(), MONTH)
+Current year	EXTRACT(YEAR FROM date)
+Year-to-date	DATE_TRUNC(CURRENT_DATE(), YEAR)
+Specific period	BETWEEN start_date AND end_date
+Numeric YYYYMMDD dates	CAST + CONCAT + SUBSTR
+
+=========================================
+
+EXAMPLE 1: Return records from the last 12 months.
+
+Inclusive vs Exclusive Dates
+
+SELECT *
+FROM Orders
+WHERE order_date >= '2025-01-01'
+AND order_date < '2026-01-01';
+
+Explanation : Preferred in professional reporting because it avoids date/time edge cases.
+Often safer than: BETWEEN
+
+=========================================
+
+EXAMPLE 2: Return records from the last 12 months.
+
+*/
+
+SELECT *
+FROM PPC_ADDM_DAILY_SALES
+WHERE date >
+REPLACE(
+  CAST(
+     DATE_SUB(CURRENT_DATE(), INTERVAL 365 DAY)
+  AS STRING),
+'-',
+''
+);
+
+# Explanation
+-- CURRENT_DATE()                 - → Today's date
+-- DATE_SUB(...365 DAY)           - → Go back one year
+-- CAST(... AS STRING)            - → Convert date to text
+-- REPLACE()                      - → Remove hyphens
+                                  - Used because source date is stored as:
+                                    20261014
+                                    instead of
+                                    2026-10-14
+
+=========================================
+
+EXAMPLE 3: Date Stored as YYYYMMDD
+Convert a numeric date into a proper date field.
+
+SELECT
+CAST(
+    CONCAT(
+        SUBSTR(CAST(Date AS STRING),1,4),
+        '-',
+        SUBSTR(CAST(Date AS STRING),5,2),
+        '-',
+        SUBSTR(CAST(Date AS STRING),7,2)
+    ) AS DATE
+) AS formatted_date
+FROM MyTable;
+
+
+## Explanation ##
+Input:  20261014
+Extract:
+2026
+10
+14
+
+Rebuild: 2026-10-14
+
+### Convert into a true SQL DATE value.
+
+Benefits:
+
+✓ Proper sorting
+✓ Date filtering
+✓ Date calculations
+✓ Dashboard compatibility
